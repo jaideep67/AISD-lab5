@@ -1,0 +1,46 @@
+{
+  "accuracy": 1.0,
+  "macro_f1": 1.0,
+  "per_class_recall": {
+    "bruteforce": 1.0,
+    "normal": 1.0,
+    "scan": 1.0,
+    "synflood": 1.0
+  },
+  "normal_false_alarm_rate": 0.0,
+  "single_predict_ms": 0.068,
+  "batch_predict_ms_avg": 0.0028,
+  "single_explain_ms": 0.06,
+  "confusion_matrix": [
+    [
+      33,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      445,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1002,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1255
+    ]
+  ],
+  "classes": [
+    "bruteforce",
+    "normal",
+    "scan",
+    "synflood"
+  ]
+}

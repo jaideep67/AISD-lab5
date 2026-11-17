@@ -1,0 +1,73 @@
+G5 XAI — SOC Analyst Explanation Examples
+============================================================
+
+─── Example: TRUE LABEL = SCAN (flow index 142) ───
+Stage-1 decision  : ATTACK
+Final prediction  : SCAN
+Correct?          : ✓ YES
+Top SHAP drivers  :
+  ↑  src2dst_bytes                        SHAP = +3.4636
+  ↓  win_dst_ports_10s                    SHAP = -1.2043
+  ↑  src2dst_mean_piat_ms                 SHAP = +0.2252
+  ↑  bidirectional_packets                SHAP = +0.0870
+  ↓  dst2src_min_ps                       SHAP = -0.0025
+
+SOC Narrative:
+Predicted: SCAN (passed Stage-1 binary filter).
+  • src2dst_bytes: SHAP +3.4636  (↑ pushed toward attack)
+  • win_dst_ports_10s: SHAP -1.2043  (↓ reduced attack score)
+  • src2dst_mean_piat_ms: SHAP +0.2252  (↑ pushed toward attack)
+  • bidirectional_packets: SHAP +0.0870  (↑ pushed toward attack)
+  • dst2src_min_ps: SHAP -0.0025  (↓ reduced attack score)
+
+Interpretation: features with the highest |SHAP| value drove this prediction the most.
+
+─── Example: TRUE LABEL = SYNFLOOD (flow index 1014) ───
+Stage-1 decision  : ATTACK
+Final prediction  : SYNFLOOD
+Correct?          : ✓ YES
+Top SHAP drivers  :
+  ↑  bidirectional_mean_ps                SHAP = +4.8415
+  ↓  win_half_open_10s                    SHAP = +0.0000
+  ↓  bidirectional_mean_piat_ms           SHAP = +0.0000
+  ↓  dst2src_min_ps                       SHAP = +0.0000
+  ↓  dst2src_mean_ps                      SHAP = +0.0000
+
+SOC Narrative:
+Predicted: SYNFLOOD (passed Stage-1 binary filter).
+  • bidirectional_mean_ps: SHAP +4.8415  (↑ pushed toward attack)
+  • win_half_open_10s: SHAP +0.0000  (↓ reduced attack score)
+  • bidirectional_mean_piat_ms: SHAP +0.0000  (↓ reduced attack score)
+  • dst2src_min_ps: SHAP +0.0000  (↓ reduced attack score)
+  • dst2src_mean_ps: SHAP +0.0000  (↓ reduced attack score)
+
+Interpretation: features with the highest |SHAP| value drove this prediction the most.
+
+─── Example: TRUE LABEL = BRUTEFORCE (flow index 802) ───
+Stage-1 decision  : ATTACK
+Final prediction  : BRUTEFORCE
+Correct?          : ✓ YES
+Top SHAP drivers  :
+  ↑  bidirectional_mean_ps                SHAP = +4.8543
+  ↓  win_half_open_10s                    SHAP = +0.0000
+  ↓  bidirectional_mean_piat_ms           SHAP = +0.0000
+  ↓  dst2src_min_ps                       SHAP = +0.0000
+  ↓  dst2src_mean_ps                      SHAP = +0.0000
+
+SOC Narrative:
+Predicted: BRUTEFORCE (passed Stage-1 binary filter).
+  • bidirectional_mean_ps: SHAP +4.8543  (↑ pushed toward attack)
+  • win_half_open_10s: SHAP +0.0000  (↓ reduced attack score)
+  • bidirectional_mean_piat_ms: SHAP +0.0000  (↓ reduced attack score)
+  • dst2src_min_ps: SHAP +0.0000  (↓ reduced attack score)
+  • dst2src_mean_ps: SHAP +0.0000  (↓ reduced attack score)
+
+Interpretation: features with the highest |SHAP| value drove this prediction the most.
+
+─── Example: TRUE LABEL = NORMAL (flow index 0) ───
+Stage-1 decision  : NORMAL
+Final prediction  : NORMAL
+Correct?          : ✓ YES
+
+SOC Narrative:
+Flow classified as NORMAL by Stage-1 filter. No further triage needed.
