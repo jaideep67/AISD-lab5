@@ -11,12 +11,12 @@ This implementation combines the core contributions of both assigned G5 papers:
 
 1. **Mahmoud et al. (2025) — XI2S-IDS (*Future Internet*)**:
    - **2-Stage Hierarchical Architecture**:
-     - *Stage 1 (Binary Filter)*: Rapidly filters out benign (`normal`) traffic with low computational overhead.
+     - *Stage 1 (Binary Filter)*: Rapidly filters out benign (`normal`) traffic with low computational overhead ($0.074\text{ ms/flow}$, giving a **$9\times$ speedup** over monolithic models).
      - *Stage 2 (Multi-Class Triage)*: Invoked only for flows flagged as attacks to distinguish `scan`, `synflood`, and `bruteforce`.
    - Balanced class weighting handles the extreme minority class (`bruteforce` has only 100 training flows).
 
 2. **Mohale & Obagbuwa (2025) (*Frontiers in Computer Science*)**:
-   - **TreeSHAP Explainability Engine**: Computes Shapley values for the 66 flow features.
+   - **TreeSHAP Explainability Engine**: Computes Shapley values for the 66 flow features in $0.060\text{ ms/flow}$.
    - **Local Explanation**: For every security alert, generates the top-5 feature drivers and a human-readable SOC narrative (e.g., explaining why a flow was identified as a port scan or brute-force attack).
    - **Global Explanation**: Summary beeswarm and feature importance bar plots showing overall feature impact across all attack traffic.
 
@@ -35,22 +35,38 @@ This implementation combines the core contributions of both assigned G5 papers:
 
 ## 3. Verified Results (Held-Out Round 6)
 
-| Metric | G5 XAI (2-Stage + SHAP) | Baseline XGBoost (1-Stage) |
-|---|---|---|
-| **Accuracy** | **1.0000** | 1.0000 |
-| **Macro-F1** | **1.0000** | 1.0000 |
-| **Bruteforce Recall** | **1.0000** (33/33) | 1.0000 |
-| **Scan Recall** | **1.0000** (1002/1002) | 1.0000 |
-| **Synflood Recall** | **1.0000** (1255/1255) | 1.0000 |
-| **Normal Recall** | **1.0000** (445/445) | 1.0000 |
-| **Normal False Alarm Rate** | **0.00%** | 0.00% |
-| **Single Flow Prediction Time** | **0.074 ms** (9× faster) | 0.670 ms |
-| **Single Flow Explanation Time** | **0.060 ms** (real-time) | N/A (Black box) |
-| **Interpretability** | ✅ Top-5 SHAP features + SOC text | ❌ None |
+| Metric | G5 XAI (2-Stage + SHAP) | Baseline XGBoost (1-Stage) | Advantage / Note |
+|---|---|---|---|
+| **Accuracy** | **1.0000** | 1.0000 | Tied |
+| **Macro-F1** | **1.0000** | 1.0000 | Tied |
+| **Bruteforce Recall** | **1.0000** (33/33) | 1.0000 | 100% recall on the hard minority class |
+| **Scan Recall** | **1.0000** (1002/1002) | 1.0000 | 100% recall |
+| **Synflood Recall** | **1.0000** (1255/1255) | 1.0000 | 100% recall |
+| **Normal Recall** | **1.0000** (445/445) | 1.0000 | 100% recall |
+| **Normal False Alarm Rate** | **0.00%** | 0.00% | Zero false alarms on benign flows |
+| **Single Flow Prediction Time** | **0.074 ms** (9× faster) | 0.670 ms | Stage 1 early filter saves compute |
+| **Single Flow Explanation Time** | **0.060 ms** (real-time) | N/A (Black box) | Instantaneous SOC attribution |
+| **Interpretability** | ✅ Top-5 SHAP features + SOC text | ❌ None | Transparent security decisions |
+
+### Comparison Plot
+![G5 vs Baseline Comparison](../../images/g5_vs_baseline_comparison.png)
 
 ---
 
-## 4. Code & Artifacts
+## 4. Visualizations
+
+### Global Feature Importance (Top-20 Features)
+![SHAP Feature Importance](../../images/g5_shap_bar.png)
+
+### SHAP Beeswarm Plot (Port Scan Category)
+![SHAP Beeswarm Plot](../../images/g5_shap_beeswarm.png)
+
+### Confusion Matrix (Round 6)
+![Confusion Matrix](../../images/g5_confusion_matrix.png)
+
+---
+
+## 5. Code & Artifacts
 
 All code resides in `cybersentinel_code/v2/`:
 - `g5_xai_pipeline.py`: Core 2-stage model training, inference, and SHAP explanation routines.
@@ -66,9 +82,9 @@ All code resides in `cybersentinel_code/v2/`:
 
 ---
 
-## 5. How to Run
+## 6. How to Run
 
-From `cybersentinel_code/v2/`:
+From `cybersentinel-ai/cybersentinel_code/v2/`:
 
 ```bash
 # Run unit tests
