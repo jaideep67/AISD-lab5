@@ -1,0 +1,59 @@
+--- Flow #589 ---
+True Label : bruteforce
+Predicted  : bruteforce
+Stage-1    : attack
+Class      : bruteforce
+Top Features:
+  • bidirectional_mean_ps: SHAP=3.7911
+  • win_half_open_10s: SHAP=0.0000
+  • src2dst_min_ps: SHAP=0.0000
+  • bidirectional_max_piat_ms: SHAP=0.0000
+  • bidirectional_stddev_piat_ms: SHAP=0.0000
+Narrative  : Predicted: BRUTEFORCE (passed Stage-1 binary filter).
+  • bidirectional_mean_ps: SHAP +3.7911  (↑ pushed toward attack)
+  • win_half_open_10s: SHAP +0.0000  (↓ reduced attack score)
+  • src2dst_min_ps: SHAP +0.0000  (↓ reduced attack score)
+  • bidirectional_max_piat_ms: SHAP +0.0000  (↓ reduced attack score)
+  • bidirectional_stddev_piat_ms: SHAP +0.0000  (↓ reduced attack score)
+
+Interpretation: features with the highest |SHAP| value drove this prediction the most.
+
+--- Flow #198 ---
+True Label : synflood
+Predicted  : synflood
+Stage-1    : attack
+Class      : synflood
+Top Features:
+  • down_up_ratio: SHAP=-2.9747
+  • src2dst_min_ps: SHAP=0.3034
+  • packets_per_s: SHAP=-0.0988
+  • src2dst_min_piat_ms: SHAP=-0.0921
+  • win_half_open_10s: SHAP=0.0186
+Narrative  : Predicted: SYNFLOOD (passed Stage-1 binary filter).
+  • down_up_ratio: SHAP -2.9747  (↓ reduced attack score)
+  • src2dst_min_ps: SHAP +0.3034  (↑ pushed toward attack)
+  • packets_per_s: SHAP -0.0988  (↓ reduced attack score)
+  • src2dst_min_piat_ms: SHAP -0.0921  (↓ reduced attack score)
+  • win_half_open_10s: SHAP +0.0186  (↑ pushed toward attack)
+
+Interpretation: features with the highest |SHAP| value drove this prediction the most.
+
+--- Flow #659 ---
+True Label : bruteforce
+Predicted  : bruteforce
+Stage-1    : attack
+Class      : bruteforce
+Top Features:
+  • bidirectional_mean_ps: SHAP=3.7911
+  • win_half_open_10s: SHAP=0.0000
+  • src2dst_min_ps: SHAP=0.0000
+  • bidirectional_max_piat_ms: SHAP=0.0000
+  • bidirectional_stddev_piat_ms: SHAP=0.0000
+Narrative  : Predicted: BRUTEFORCE (passed Stage-1 binary filter).
+  • bidirectional_mean_ps: SHAP +3.7911  (↑ pushed toward attack)
+  • win_half_open_10s: SHAP +0.0000  (↓ reduced attack score)
+  • src2dst_min_ps: SHAP +0.0000  (↓ reduced attack score)
+  • bidirectional_max_piat_ms: SHAP +0.0000  (↓ reduced attack score)
+  • bidirectional_stddev_piat_ms: SHAP +0.0000  (↓ reduced attack score)
+
+Interpretation: features with the highest |SHAP| value drove this prediction the most.

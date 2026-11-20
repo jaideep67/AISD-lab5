@@ -1,0 +1,9 @@
+Metric,G5 2-Stage+SHAP,XGBoost Baseline
+Macro-F1,0.9645,0.9844
+Accuracy,0.9872,0.9936
+FAR (%),0.17,0.00
+Recall-normal,0.9983,1.0000
+Recall-bruteforce,0.9420,0.9565
+Recall-scan,0.9643,0.9643
+Recall-synflood,0.9574,0.9894
+Explainability,TreeSHAP global+local,None (black-box)
