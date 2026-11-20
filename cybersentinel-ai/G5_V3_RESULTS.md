@@ -56,13 +56,28 @@ Only 10 misclassifications out of 781 flows.
 
 ---
 
-## SHAP Explainability
+## SHAP Explainability (High-Resolution 300 DPI)
 
-### Global Feature Importance
+### Global Feature Importance (Top 15 Attack Discriminators)
+Ranks the most critical network flow attributes utilized by the Stage-2 XGBoost classifier to differentiate between attacks.
+
 ![SHAP Bar](images/v3/g5_v3_shap_bar.png)
 
-### Feature Impact Beeswarm
-![SHAP Beeswarm](images/v3/g5_v3_shap_beeswarm.png)
+### Multi-Class Feature Impact Beeswarm (Combined View)
+Shows the directional impact (positive / negative SHAP values) of feature values across all three attack classes (`bruteforce`, `scan`, `synflood`).
+
+![SHAP Beeswarm Combined](images/v3/g5_v3_shap_beeswarm.png)
+
+### Detailed Per-Class Beeswarm Signatures
+
+#### 1. Bruteforce Attack Signature
+![SHAP Beeswarm Bruteforce](images/v3/g5_v3_shap_beeswarm_bruteforce.png)
+
+#### 2. Port/Network Scan Signature
+![SHAP Beeswarm Scan](images/v3/g5_v3_shap_beeswarm_scan.png)
+
+#### 3. SYN Flood Attack Signature
+![SHAP Beeswarm SynFlood](images/v3/g5_v3_shap_beeswarm_synflood.png)
 
 ---
 
